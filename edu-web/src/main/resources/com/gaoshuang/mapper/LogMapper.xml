@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaoshuang.mapper.LogMapper">
+    <select id="list" resultType="com.gaoshuang.pojo.OperateLog">
+        select ol.*, e.name as operateEmpName
+        from operate_log ol
+        left join emp e on ol.operate_emp_id = e.id
+        <where>
+            <if test="operateEmpId != null">
+                and ol.operate_emp_id = #{operateEmpId}
+            </if>
+            <if test="className != null and className != ''">
+                and ol.class_name like concat('%', #{className}, '%')
+            </if>
+            <if test="methodName != null and methodName != ''">
+                and ol.method_name like concat('%', #{methodName}, '%')
+            </if>
+
+        </where>
+        order by ol.operate_time desc
+    </select>
+</mapper>

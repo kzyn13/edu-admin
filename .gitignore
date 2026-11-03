@@ -1,0 +1,14 @@
+﻿# Maven
+target/
+
+# IDEA
+.idea/
+*.iml
+
+# 日志
+logs/
+*.log
+
+# 系统
+.DS_Store
+Thumbs.db
