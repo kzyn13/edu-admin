@@ -41,8 +41,13 @@ edu-admin
 ### 1. 初始化数据库
 
 ```bash
+# Linux / macOS / Git Bash
 mysql -u root -p < edu-web/src/main/resources/db/schema.sql
 mysql -u root -p < edu-web/src/main/resources/db/data.sql
+
+# Windows PowerShell（不支持 < 重定向，用 source）
+mysql -u root -p -e "source edu-web/src/main/resources/db/schema.sql"
+mysql -u root -p -e "source edu-web/src/main/resources/db/data.sql"
 ```
 
 `schema.sql` 会自动创建 `edu_admin` 库。
