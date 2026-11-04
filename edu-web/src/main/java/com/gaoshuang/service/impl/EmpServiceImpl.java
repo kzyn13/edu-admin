@@ -88,8 +88,10 @@ public class EmpServiceImpl implements EmpService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(List<Integer> ids) {
-        empMapper.deleteByIds(ids);
+        // 先删子表（工作经历），再删主表（员工）
+        // 这样将来给 emp_expr 加上外键约束，也不会因外键冲突而失败
         empExperMapper.deleteByEmpIds(ids);
+        empMapper.deleteByIds(ids);
     }
 
     /** 根据 id 查询员工信息 */
